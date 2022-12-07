@@ -100,9 +100,9 @@ public class SwiftFlutterAppcenterBundlePlugin: NSObject, FlutterPlugin {
             return
         }
 
-        let exception = args["exceptionStringRepresentation"] as String
+        let exception = args["exceptionStringRepresentation"] as? String
         let stacktrace = args["stacktrace"] as? String
-        let properties = args["properties"] as? Dictionary<String, String>
+        let properties = args["properties"] as? [String: String]
 
         let customError = AnalyticsError(message: exception)
 
