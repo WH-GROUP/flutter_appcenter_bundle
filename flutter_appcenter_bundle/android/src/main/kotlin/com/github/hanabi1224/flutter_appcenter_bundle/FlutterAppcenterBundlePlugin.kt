@@ -20,7 +20,7 @@ import io.flutter.plugin.common.PluginRegistry.Registrar
 
 /** FlutterAppcenterBundlePlugin */
 class FlutterAppcenterBundlePlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
-    override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
+    override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         val channel = MethodChannel(flutterPluginBinding.binaryMessenger, methodChannelName)
         channel.setMethodCallHandler(FlutterAppcenterBundlePlugin())
     }
@@ -47,7 +47,7 @@ class FlutterAppcenterBundlePlugin : FlutterPlugin, MethodCallHandler, ActivityA
         }
     }
 
-    override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
+    override fun onMethodCall(call: MethodCall, result: Result) {
         Log.d("onMethodCall", "[${methodChannelName}] ${call.method}")
         try {
             when (call.method) {
@@ -116,14 +116,14 @@ class FlutterAppcenterBundlePlugin : FlutterPlugin, MethodCallHandler, ActivityA
                         exception.stackTrace = stackTrace.split('\n').flatMap { line ->
                             val regex =
                                 "^#\\d* *(?<methodName>[a-zA-Z1-9_]*).*\\((?<fileName>[a-zA-Z0-9:_/.]*.dart):(?<lineNumber>\\d*).*\$".toRegex()
-                            
+
                             val stackTraceLine : Array<StackTraceElement> = if (regex.matches(line)) {
                                 val groups =
                                     regex.matchEntire(line)!!.groups as? MatchNamedGroupCollection
                                 val fileName = groups!!["fileName"]!!.value
                                 val methodName = groups["methodName"]!!.value
                                 val lineNumber = groups["lineNumber"]!!.value.toInt()
-                                
+
                                 arrayOf(
                                     StackTraceElement(
                                         fileName,
@@ -165,7 +165,7 @@ class FlutterAppcenterBundlePlugin : FlutterPlugin, MethodCallHandler, ActivityA
         }
     }
 
-    override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
+    override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
