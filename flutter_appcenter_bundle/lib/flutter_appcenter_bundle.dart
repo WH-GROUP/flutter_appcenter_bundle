@@ -19,16 +19,16 @@ class AppCenter {
     usePrivateDistributeTrack = false,
     disableAutomaticCheckForUpdate = false,
   }) async {
-    String appsecret;
+    String appSecret;
     if (Platform.isAndroid) {
-      appsecret = appSecretAndroid;
+      appSecret = appSecretAndroid;
     } else if (Platform.isIOS) {
-      appsecret = appSecretIOS;
+      appSecret = appSecretIOS;
     } else {
       throw UnsupportedError('Current platform is not supported.');
     }
 
-    if (appsecret.isEmpty) {
+    if (appSecret.isEmpty) {
       return;
     }
 
@@ -43,7 +43,7 @@ class AppCenter {
     await configureDistributeAsync(enabled: enableDistribute);
 
     await _methodChannel.invokeMethod('start', <String, dynamic>{
-      'secret': appsecret.trim(),
+      'secret': appSecret.trim(),
       'usePrivateTrack': usePrivateDistributeTrack,
     });
   }
