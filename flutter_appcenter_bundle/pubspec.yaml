@@ -5,8 +5,8 @@ homepage: https://github.com/hanabi1224/flutter_appcenter_bundle
 publish_to: https://pub.dev/
 
 environment:
-  sdk: ">=2.12.0 <4.0.0"
-  flutter: ">=1.10.0"
+  sdk: ^3.5.0
+  flutter: '>=3.3.0'
 
 dependencies:
   flutter:
